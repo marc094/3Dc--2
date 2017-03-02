@@ -21,6 +21,7 @@ public:
 	bool getExitState();
 	bool isKeyboardPressed(Key k);
 	void Update(float dt);
+	void Init();
 	~EventManager();
 };
 

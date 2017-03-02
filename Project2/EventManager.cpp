@@ -4,8 +4,14 @@ EventManager* EventManager::_instance = nullptr;
 
 EventManager::EventManager()
 {
+	Init();
 }
 
+void EventManager::Init() {
+	for (int i = 0; i <= Key::KEY_d; i++) {
+		keys[i] = false;
+	}
+}
 
 EventManager::~EventManager()
 {
