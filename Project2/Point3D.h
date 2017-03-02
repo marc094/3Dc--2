@@ -12,8 +12,13 @@ public:
 	float z();
 	void z(float z );
 
+	Point3D operator +(Point3D);
+	Point3D operator -(Point3D);
+	void operator +=(Point3D);
+	void operator -=(Point3D);
+	Point3D operator *(float);
+
 	Point3D(float, float, float);
 	Point3D();
 	virtual ~Point3D();
 };
-

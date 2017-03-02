@@ -61,8 +61,8 @@ Matrix Matrix::operator *(Matrix a) {
 		}
 	}
 
-	printf("Success multiplying!\n");
-	result.print();
+	/*printf("Success multiplying!\n");
+	result.print();*/
 	return result;
 }
 
