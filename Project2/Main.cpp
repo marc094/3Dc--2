@@ -53,6 +53,16 @@ int main(int argc, char *args[]) {
 
 	while (!_event_manager->getExitState()) {
 		_event_manager->Update(0.0);
+
+		if (_event_manager->isKeyboardPressed(KEY_a))
+			_rect.x -= 1;
+		if (_event_manager->isKeyboardPressed(KEY_w))
+			_rect.y -= 1;
+		if (_event_manager->isKeyboardPressed(KEY_s))
+			_rect.y += 1;
+		if (_event_manager->isKeyboardPressed(KEY_d))
+			_rect.x += 1;
+
 		SDL_RenderClear(_window_renderer);
 
 		//Quadrat

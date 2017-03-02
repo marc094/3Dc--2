@@ -28,6 +28,34 @@ void EventManager::Update(float dt) {
 			case SDLK_ESCAPE:
 				quit = true;
 				break;
+			case SDLK_a:
+				keys[KEY_a] = true;
+				break;
+			case SDLK_w:
+				keys[KEY_w] = true;
+				break;
+			case SDLK_s:
+				keys[KEY_s] = true;
+				break;
+			case SDLK_d:
+				keys[KEY_d] = true;
+				break;
+			}
+			break;
+		case SDL_KEYUP:
+			switch (event.key.keysym.sym) {
+			case SDLK_a:
+				keys[KEY_a] = false;
+				break;
+			case SDLK_w:
+				keys[KEY_w] = false;
+				break;
+			case SDLK_s:
+				keys[KEY_s] = false;
+				break;
+			case SDLK_d:
+				keys[KEY_d] = false;
+				break;
 			}
 			break;
 		case SDL_QUIT:
@@ -39,4 +67,8 @@ void EventManager::Update(float dt) {
 
 bool EventManager::getExitState() {
 	return quit;
+}
+
+bool EventManager::isKeyboardPressed(Key k) {
+	return keys[k];
 }
