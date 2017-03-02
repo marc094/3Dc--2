@@ -6,7 +6,6 @@
 #pragma comment( lib, "External/SDL2-2.0.5/lib/x64/SDL2main.lib")
 #pragma comment( lib, "External/SDL2_image-2.0.0/lib/x64/SDL2_image.lib")
 
-#undef main
 
 SDL_Window* _window = NULL;
 
@@ -19,7 +18,7 @@ EventManager* _event_manager = EventManager::getInstance();
 bool init();
 void close();
 
-void main(int argc, char *args[]) {
+int main(int argc, char *args[]) {
 
 	init();
 
@@ -52,10 +51,8 @@ void main(int argc, char *args[]) {
 
 	SDL_RenderPresent(_window_renderer);
 
-	bool exit = false;
-	while (!exit) {
+	while (!_event_manager->getExitState()) {
 		_event_manager->Update(0.0);
-		exit = _event_manager->getExitState();
 		SDL_RenderClear(_window_renderer);
 
 		//Quadrat
@@ -72,7 +69,7 @@ void main(int argc, char *args[]) {
 
 
 	close();
-
+	return 0;
 }
 
 bool init() {

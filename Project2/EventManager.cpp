@@ -24,9 +24,10 @@ void EventManager::Update(float dt) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
-			switch (event.key.keysym.scancode) {
-			case SDL_SCANCODE_ESCAPE:
+			switch (event.key.keysym.sym) {
+			case SDLK_ESCAPE:
 				quit = true;
+				break;
 			}
 			break;
 		case SDL_QUIT:
