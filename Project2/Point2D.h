@@ -20,6 +20,12 @@ public:
 	Matrix getMatrix();
 	void applyMatrix(Matrix);
 
+	Point2D operator +(Point2D);
+	Point2D operator -(Point2D);
+	void operator +=(Point2D);
+	void operator -=(Point2D);
+	Point2D operator *(float);
+
 	Point2D(float, float);
 	Point2D();
 	virtual ~Point2D();

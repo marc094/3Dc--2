@@ -21,77 +21,13 @@ Triangle3D::~Triangle3D()
 {
 }
 
-void Triangle3D::Rotate(Point3D angle) {
+void Triangle3D::rotate(Point3D angle) {
 	/*if (pow(vector.x(), 2) + pow(vector.y(), 2) + pow(vector.z(), 2) != 1) {
 		printf("Error: cant rotate around this axis");
 		return;
 	}
-	else {*/
-	/*Matrix mX(4, 4);
-	mX[0][0] = 1;
-	mX[0][1] = 0;
-	mX[0][2] = 0;
-	mX[0][3] = 0;
-
-	mX[1][0] = 0;
-	mX[1][1] = cos(angle.x());
-	mX[1][2] = -sin(angle.x());
-	mX[1][3] = 0;
-
-	mX[2][0] = 0;
-	mX[2][1] = sin(angle.x());
-	mX[2][2] = cos(angle.x());
-	mX[2][3] = 0;
-
-	mX[3][0] = 0;
-	mX[3][1] = 0;
-	mX[3][2] = 0;
-	mX[3][3] = 1;
-
-	Matrix mY(4, 4);
-	mY[0][0] = cos(angle.y());
-	mY[0][1] = 0;
-	mY[0][2] = sin(angle.y());
-	mY[0][3] = 0;
-
-	mY[1][0] = 0;
-	mY[1][1] = 1;
-	mY[1][2] = 0;
-	mY[1][3] = 0;
-
-	mY[2][0] = -sin(angle.y());
-	mY[2][1] = 0;
-	mY[2][2] = cos(angle.y());
-	mY[2][3] = 0;
-
-	mY[3][0] = 0;
-	mY[3][1] = 0;
-	mY[3][2] = 0;
-	mY[3][3] = 1;
-
-	Matrix mZ(4, 4);
-	mZ[0][0] = cos(angle.z());
-	mZ[0][1] = -sin(angle.z());
-	mZ[0][2] = 0;
-	mZ[0][3] = 0;
-
-	mZ[1][0] = sin(angle.z());
-	mZ[1][1] = cos(angle.z());
-	mZ[1][2] = 0;
-	mZ[1][3] = 0;
-
-	mZ[2][0] = 0;
-	mZ[2][1] = 0;
-	mZ[2][2] = 1;
-	mZ[2][3] = 0;
-
-	mZ[3][0] = 0;
-	mZ[3][1] = 0;
-	mZ[3][2] = 0;
-	mZ[3][3] = 1;*/
-	
+	else {*/	
 	Matrix mT(4, 4);
-	float aux = cos(angle.y())*cos(angle.z());
 	mT[0][0] = cos(angle.y())*cos(angle.z());
 	mT[0][1] = cos(angle.z())*sin(angle.x())*sin(angle.y())-cos(angle.x())*sin(angle.z());
 	mT[0][2] = cos(angle.x())*cos(angle.z())*sin(angle.y())+sin(angle.x())*sin(angle.z());
@@ -112,12 +48,40 @@ void Triangle3D::Rotate(Point3D angle) {
 	mT[3][2] = 0;
 	mT[3][3] = 1;
 
-	for each(Point3D p in vertex) {
-		Matrix m = p.getMatrix();
+	for (int i = 0; i < vertex.size(); i++) {
+		Matrix m = vertex[i].getMatrix();
 
 		m = mT * m;
 
-		p.applyMatrix(m);
+		vertex[i].applyMatrix(m);
 	}
 	//}
+}
+
+void Triangle3D::translate(Point3D dist) {
+	for (int i = 0; i < vertex.size(); i++) {
+		vertex[i].setRelativePosition(vertex[i].getRelativePosition() + dist);
+	}
+}
+
+
+void Triangle3D::renderLines(SDL_Renderer* renderer) {
+	int size = vertex.size();
+	SDL_Point* points = (SDL_Point*)malloc((size + 1) * sizeof(SDL_Point));
+	
+	for (int i = 0; i < size; i++) {
+		points[i].x = vertex[i].getAbsolutePosition().x();
+		points[i].y = vertex[i].getAbsolutePosition().y();
+	}
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderDrawLines(renderer, points, size);
+	SDL_RenderDrawLine(renderer, points[size-1].x, points[size-1].y, points[0].x, points[0].y);
+	//SDL_RenderDrawPoint(renderer, points[0]->x, points[0]->y);
+	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+}
+
+void Triangle3D::centerAround(Transform* mesh) {
+	for (int i = 0; i < vertex.size(); i++) {
+		vertex[i].bind(mesh);
+	}
 }

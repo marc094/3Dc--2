@@ -28,9 +28,11 @@ float Point2D::y() {
 }
 void Point2D::x(float x) {
 	_x = x;
+	updateMatrix();
 }
 void Point2D::y(float y) {
 	_y = y;
+	updateMatrix();
 }
 
 Matrix Point2D::getMatrix() {
@@ -50,4 +52,30 @@ void Point2D::applyMatrix(Matrix m) {
 void Point2D::updatePoint() {
 	_x = _matrix[0][0];
 	_y = _matrix[0][1];
+}
+
+Point2D Point2D::operator +(Point2D p) {
+	Point2D res(x() + p.x(), y() + p.y());
+	return res;
+}
+
+Point2D Point2D::operator -(Point2D p) {
+	Point2D res(x() - p.x(), y() - p.y());
+	return res;
+}
+
+void Point2D::operator +=(Point2D p) {
+	x(x() + p.x());
+	y(y() + p.y());
+}
+
+void Point2D::operator -=(Point2D p) {
+	x(x() - p.x());
+	y(y() - p.y());
+}
+
+Point2D Point2D::operator *(float f) {
+	x(f*x());
+	y(f*y());
+	return *this;
 }
