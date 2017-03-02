@@ -30,6 +30,8 @@ int main(int argc, char *args[]) {
 	Point3D p4(0, 0, 150);
 	Point3D center(600, 550, 75);
 	Point3D rotation(0, M_PI / 1024, 0);
+	Point3D _rotation(0, -M_PI / 1024, 0);
+	Point3D rotation2(-M_PI / 2, 0, 0);
 
 	Triangle3D triangle(p1, p2, p3);
 	Triangle3D triangle2(p1, p2, p4);
@@ -45,6 +47,7 @@ int main(int argc, char *args[]) {
 
 
 	Mesh3D mesh(center, triangles);
+	mesh.rotate(rotation2);
 
 	SDL_Rect _rect{ 200, 50, 100, 100 };
 
@@ -74,7 +77,10 @@ int main(int argc, char *args[]) {
 			SDL_SetRenderDrawColor(_window_renderer, 0x00, 0x00, 0xFF, 0xFF);
 			SDL_RenderFillRect(_window_renderer, &_rect);
 
-			mesh.rotate(rotation);
+			if (_event_manager->isKeyboardPressed(KEY_d))
+				mesh.rotate(rotation);
+			if (_event_manager->isKeyboardPressed(KEY_a))
+				mesh.rotate(_rotation);
 			mesh.renderLines(_window_renderer);
 
 			SDL_RenderPresent(_window_renderer);

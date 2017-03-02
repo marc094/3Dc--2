@@ -31,6 +31,7 @@ void MainLoop::Loop() {
 
 		end_time = SDL_GetTicks();
 		delta_time = end_time - start_time;
+		printf("Delta time: %d\n", delta_time);
 	}
 }
 
@@ -44,6 +45,6 @@ void MainLoop::Run() {
 	Loop();
 }
 
-void MainLoop::setMainFunc(std::function<void(float)> func) {
+void MainLoop::setMainFunc(std::function<void(int)> func) {
 	mainFunction = func;
 }

@@ -8,7 +8,7 @@ private:
 	static MainLoop* _instance;
 	MainLoop();
 
-	float start_time,
+	int start_time,
 		end_time,
 		delta_time,
 		prev_delta_time,
@@ -21,12 +21,12 @@ private:
 		logic_time,
 		prev_logic_time;
 
-	std::function <void(float)> mainFunction;
+	std::function <void(int)> mainFunction;
 public:
 	static MainLoop* getInstance();
 	void Loop();
 	void Run();
-	void setMainFunc(std::function<void(float)> func);
+	void setMainFunc(std::function<void(int)> func);
 	~MainLoop();
 };
 
