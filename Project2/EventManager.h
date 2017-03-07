@@ -6,7 +6,8 @@ enum Key
 	KEY_a,
 	KEY_w,
 	KEY_s,
-	KEY_d
+	KEY_d,
+	KEY_SPACE
 };
 
 class EventManager
@@ -14,7 +15,7 @@ class EventManager
 private:
 	static EventManager* _instance;
 	bool quit = false;
-	bool keys[4];
+	bool keys[5];
 	EventManager();
 public:
 	static EventManager* getInstance();
