@@ -8,7 +8,7 @@ EventManager::EventManager()
 }
 
 void EventManager::Init() {
-	for (int i = 0; i <= Key::KEY_SPACE; i++) {
+	for (int i = 0; i <= Key::KEY_RIGHT; i++) {
 		keys[i] = false;
 	}
 }
@@ -50,6 +50,9 @@ void EventManager::Update(float dt) {
 			case SDLK_SPACE:
 				keys[KEY_SPACE] = true;
 				break;
+			case SDLK_RIGHT:
+				keys[KEY_RIGHT] = true;
+				break;
 			}
 			break;
 		case SDL_KEYUP:
@@ -66,9 +69,9 @@ void EventManager::Update(float dt) {
 			case SDLK_d:
 				keys[KEY_d] = false;
 				break;
-			/*case SDLK_SPACE:
-				keys[KEY_SPACE] = false;
-				break;*/
+			case SDLK_RIGHT:
+				keys[KEY_RIGHT] = false;
+				break;
 			}
 			break;
 		case SDL_QUIT:

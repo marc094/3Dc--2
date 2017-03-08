@@ -7,7 +7,8 @@ enum Key
 	KEY_w,
 	KEY_s,
 	KEY_d,
-	KEY_SPACE
+	KEY_SPACE,
+	KEY_RIGHT
 };
 
 class EventManager
